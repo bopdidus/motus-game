@@ -1,0 +1,12 @@
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.csproj.AssemblyReference.cache
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.csproj.SuggestedBindingRedirects.cache
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.Form1.resources
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.Properties.Resources.resources
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.csproj.GenerateResource.cache
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.csproj.CoreCompileInputs.cache
+C:\Users\armel\Documents\current_project\Motus\bin\Debug\Motus.exe.config
+C:\Users\armel\Documents\current_project\Motus\bin\Debug\Motus.exe
+C:\Users\armel\Documents\current_project\Motus\bin\Debug\Motus.pdb
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.exe
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.pdb
+C:\Users\armel\Documents\current_project\Motus\obj\Debug\Motus.CustomMessageBox.resources
