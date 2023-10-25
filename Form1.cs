@@ -15,10 +15,10 @@ namespace Motus
     public partial class Form1 : Form
     {
         Button[,] buttons;
-        static int essay;
+        static int attempt;
         string secretWord;
         string[] lines;
-        List<int> foundIndexes;
+        bool[] found;
         public Form1()
         {
             InitializeComponent();
@@ -26,35 +26,36 @@ namespace Motus
             buttons = new Button[6, 6] { {btn1, btn2, btn3,btn4, btn5, btn6 }, {btn7, btn8, btn9, btn10, btn11, btn12},
             {btn13, btn14, btn15, btn16, btn17, btn18},{btn19, btn20, btn21, btn22, btn23, btn24},{btn25, btn26, btn27, btn28, btn29,btn30},
             {btn31, btn32,btn33, btn34,btn35,btn36}};
-            essay = 6;
-            foundIndexes = new List<int>();
-            lbEssay.Text = essay.ToString();
+            attempt = 6;
 
             Task.Run(()=> ReadWord());
-          
+            found = new bool[6] { true, false, false, false,false,false };
         }
 
         public void InitializeTable()
         {
             buttons[0,0].Text = secretWord[0].ToString();
+            for(int k=1; k < 6; k++)
+            {
+                buttons[0, k].Text = ".";
+            }
         }
 
         private void btnProp_Click(object sender, EventArgs e)
         {
-            if (txtProp.Text.Length > 6 || txtProp.Text.Length < 6)
-                MessageBox.Show("La longueur du mot ne correspond pas");
-            else
+            if (attempt > 0)
             {
-                if(essay >0)
+                if (txtProp.Text.Length > 6 || txtProp.Text.Length < 6)
+                    MessageBox.Show("Falsche Laenge des Wortes");
+                else
                 {
-
                     CheckSecretWord(txtProp.Text);
-                    
-                    lbEssay.Text = essay.ToString();
-                    LoadCells(foundIndexes.ToArray());
+
+                    LoadCells();
                 }
-                           
             }
+                
+           
         }
 
         public void ReadWord()
@@ -94,12 +95,10 @@ namespace Motus
             
             if (string.Equals(secretWord, word, StringComparison.CurrentCultureIgnoreCase))
             {
-                MessageBox.Show("Tu as gagné !!!");
+                MessageBox.Show("Sie haben gewonnen !!!");
                 Task.Run(() => Win());
-                essay = 6;
-                
-                    ReadWord();
-                
+                attempt = 6;
+                ReadWord();
             }
                
             else
@@ -109,19 +108,18 @@ namespace Motus
                 {
                     if(string.Equals(secretWord[i].ToString() ,txtProp.Text[i].ToString(), StringComparison.CurrentCultureIgnoreCase))
                     {
-                        buttons[6 - essay, i].BackColor = Color.Green;
-                        if(!foundIndexes.Contains(i))
-                            foundIndexes.Add(i);
+                        buttons[6 - attempt, i].BackColor = Color.Green;
+                        found[i]= true;
                     }
                     else if(secretWord.Contains(txtProp.Text[i].ToString().ToUpper()))
                     {
-                        buttons[6 - essay, i].BackColor = Color.Orange;
+                        buttons[6 - attempt, i].BackColor = Color.Orange;
                     }
                     else
                     {
-                        buttons[6 - essay, i].BackColor = Color.Red;
+                        buttons[6 - attempt, i].BackColor = Color.Red;
                     }
-                    buttons[6 - essay, i].Text = txtProp.Text[i].ToString().ToUpper();
+                    buttons[6 - attempt, i].Text = txtProp.Text[i].ToString().ToUpper();
 
                 }
                 Task.Run(() => NotWin());
@@ -129,7 +127,7 @@ namespace Motus
 
             }
 
-            essay -= 1;
+            attempt -= 1;
         }
 
         public void NotWin()
@@ -154,25 +152,28 @@ namespace Motus
         {
             for (int i = 1; i < 6; i++)
             {
-                if (buttons[6 - essay, i].Text == ".")
-                    buttons[6 - essay, i].Text = secretWord[i].ToString().ToUpper();
-                    foundIndexes.Add(i);
+                if (found[i] == false)
+                {
+                    buttons[6 - attempt, i].Text = secretWord[i].ToString().ToUpper();
+                    found[i] = true;
                     break;
+                }
+                                      
             }
             btnJoker.Enabled = false;
             btnJoker.BackColor = Color.LightSkyBlue;
         }
 
-        public void LoadCells(int[] indexs)
+        public void LoadCells()
         {
-            if (essay > 0)
+            if (attempt > 0)
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    if (indexs.Contains(i))
-                        buttons[6 - essay, i].Text = secretWord[i].ToString().ToUpper();
+                    if (found[i] == true)
+                        buttons[6 - attempt, i].Text = secretWord[i].ToString().ToUpper();
                     else
-                        buttons[6 - essay, i].Text = ".";
+                        buttons[6 - attempt, i].Text = ".";
                 }
             }
             else
@@ -180,7 +181,7 @@ namespace Motus
                 
                 Task.Run(() => LoadSecretWord());
                 Task.Run(() => Lose());
-                MessageBox.Show("Tu as perdu !!!");
+                MessageBox.Show("Sie haben verloren !!!");
             }
             
         }
@@ -210,6 +211,27 @@ namespace Motus
             {
                 Task.Run(() => Lose());
             }*/
+        }
+
+        private void Reset()
+        {
+            for(int i=0; i<6; i++)
+            {
+                for(int j = 0; j < 6; j++)
+                {
+                    buttons[i, j].Text = "";
+                    buttons[i, j].BackColor = Color.Transparent;
+                }
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => ReadWord());
+            found = new bool[6] { true, false, false, false, false, false };
+            attempt = 6;
+            Reset();
+            InitializeTable();
         }
     }
 }

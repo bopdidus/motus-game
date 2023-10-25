@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motus", "Motus.csproj", "{7581A14A-B61E-4984-92B0-29A441D75ADA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotusVersion2", "..\MotusVersion2\MotusVersion2.csproj", "{9CAC9562-408C-4438-BD9D-E8DE3B58F5E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7581A14A-B61E-4984-92B0-29A441D75ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7581A14A-B61E-4984-92B0-29A441D75ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7581A14A-B61E-4984-92B0-29A441D75ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CAC9562-408C-4438-BD9D-E8DE3B58F5E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CAC9562-408C-4438-BD9D-E8DE3B58F5E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CAC9562-408C-4438-BD9D-E8DE3B58F5E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CAC9562-408C-4438-BD9D-E8DE3B58F5E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
